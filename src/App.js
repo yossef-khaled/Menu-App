@@ -2,9 +2,20 @@ import logo from './logo.svg';
 import { Navbar, NavbarBrand} from 'reactstrap'; 
 import Menu from './Components/MenuComponent';
 import './App.css';
+import { DISHES } from './Shared/dishes';
 
-function App() {
-  return (
+class App extends Component {
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      dishes : DISHES
+    };
+  }
+
+  render() { 
+    return (
     <div>
       <Navbar dark color="primary">
         <div className="container">
@@ -17,7 +28,9 @@ function App() {
       </Navbar>
       <Menu/>
     </div>
-  );
+     );
+  }
 }
-
+ 
 export default App;
+
