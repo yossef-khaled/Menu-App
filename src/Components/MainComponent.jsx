@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import { Navbar, NavbarBrand} from 'reactstrap'; 
 import Menu from './MenuComponent';
+import Header from './HeaderComponent';
 import { DISHES } from '../Shared/dishes';
 
 class Main extends Component {
@@ -22,15 +22,7 @@ class Main extends Component {
   render() { 
     return (
     <div>
-      <Navbar dark color="primary">
-        <div className="container">
-          
-          {/*NavbarBrand gives the menu tag more space than without it */}
-          <NavbarBrand href="/">
-            Resturant Menu
-          </NavbarBrand>
-        </div>
-      </Navbar>
+      <Header />
       <Menu dishes={this.state.dishes} selectedDish={this.state.selectedDish} onClick={(dishID) => this.onDishSelect(dishID)}/>
     </div>
      );
