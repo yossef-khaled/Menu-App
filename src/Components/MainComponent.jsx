@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Menu from './MenuComponent';
 import Header from './HeaderComponent';
+import Footer from './FooterComponent';
 import { DISHES } from '../Shared/dishes';
 
 class Main extends Component {
@@ -24,6 +25,7 @@ class Main extends Component {
     <div>
       <Header />
       <Menu dishes={this.state.dishes} selectedDish={this.state.selectedDish} onClick={(dishID) => this.onDishSelect(dishID)}/>
+      <Footer />
     </div>
      );
   }
