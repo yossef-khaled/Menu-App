@@ -24,7 +24,7 @@ function RenderClickedDish({ dish, handleCardClick }) {
     console.log("Render Clicked Dish !!!!");
     return (
       <div className="col-12 col-md-5 m-1">
-        <RenderMenuItem dish={dish} onClick={() => handleCardClick(dish.id)} />
+        <RenderMenuItem dish={dish} handleCardClick={() => handleCardClick()} />
       </div>
     );
   } else {
@@ -47,7 +47,7 @@ function Menu(props) {
       <div className="row">
         <RenderClickedDish
           dish={props.dishes[props.selectedDish]}
-          onClick={() => props.handleCardClick(props.dishes[props.selectedDish])}
+          handleCardClick={() => props.handleCardClick(props.dishes[props.selectedDish])}
         />
       </div>
     </div>
