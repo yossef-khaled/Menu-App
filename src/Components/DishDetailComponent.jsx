@@ -2,11 +2,10 @@ import {
     Row,
     Card,
     CardImg,
-    CardImgOverlay,
     CardTitle,
     CardText,
     Breadcrumb,
-    BreadcrumbItem
+    BreadcrumbItem,
   } from "reactstrap";  
 import {Link} from 'react-router-dom';
 
@@ -50,7 +49,7 @@ function DishDetail({dish, comments}) {
                     </CardText>
                     <div className="container">
                         <h3>Comments :</h3>
-                        {dishComments}
+                        {dishComments.length > 0 ? dishComments : <p className="ml-3 text-muted">- There is no comments for this dish</p>}
                     </div>
                 </Card>
             </Row>
