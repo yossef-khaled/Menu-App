@@ -4,14 +4,17 @@ import {
     CardImgOverlay,
     CardTitle,
   } from "reactstrap";  
+import { Link } from 'react-router-dom';
 
-function MenuItem({ dish, handleCardClick }) {
+function MenuItem({ dish }) {
     return (
-      <Card key={dish.id} onClick={() => handleCardClick(dish.id)} className="menuItem">
-        <CardImg width="100%" src={dish.image} alt={dish.name} />
-        <CardImgOverlay>
-          <CardTitle>{dish.name}</CardTitle>
-        </CardImgOverlay>
+      <Card>
+        <Link to={`menu/${dish.id}`}>
+          <CardImg width="100%" src={dish.image} alt={dish.name} />
+          <CardImgOverlay>
+            <CardTitle>{dish.name}</CardTitle>
+          </CardImgOverlay>
+        </Link>
       </Card>
     );
   }

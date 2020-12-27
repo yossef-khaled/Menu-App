@@ -9,6 +9,7 @@ import { COMMENTS } from '../Shared/comments';
 import { LEADERS } from '../Shared/leaders';
 import { PROMOTIONS } from '../Shared/promotions';
 import { Switch, Route, Redirect } from 'react-router-dom';
+import DishDetail from './DishDetailComponent';
 
 class Main extends Component {
 
@@ -42,13 +43,20 @@ class Main extends Component {
       );
     }
 
+    const SpecificDish = ({match, location, history}) => {
+      return(
+        
+      );
+    }
+
     return (
     <div>
       <Header />
       <Switch>
         <Route path="/home" component={HomePage} />
         <Route exact path="/contactus" component={ContactUs}/>
-        <Route exact path="/menu" component={() => <Menu dishes={this.state.dishes} selectedDish={this.state.selectedDish} handleCardClick={(id) => this.handleCardClick(id)}/>}/>
+        <Route exact path="/menu" component={() => <Menu dishes={this.state.dishes} selectedDish={this.state.selectedDish } handleCardClick={(id) => this.handleCardClick(id)}/>}/>
+        <Route path="/menu/:dishId" component={SpecificDish}/>
         <Redirect to="/home"/>
       </Switch>
       <Footer />
