@@ -45,7 +45,9 @@ class Main extends Component {
 
     const SpecificDish = ({match, location, history}) => {
       return(
-        
+        <DishDetail dish={this.state.dishes[parseInt(match.params.dishId)]}
+                    comments={this.state.comments.filter((comment) => comment.dishId === parseInt(match.params.dishId, 10))}
+        />
       );
     }
 
