@@ -39,7 +39,7 @@ function DishDetail({dish, comments}) {
                     </div> 
                 </div>
             </Row>
-            <Row>
+            <Row className="align-items-start">
                 <CardImg width="100%" className="col-6" src={dish.image} alt={dish.name} />
                 <Card className="col-5">
                     <CardTitle className="m-2" tag="h4">
