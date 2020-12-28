@@ -3,13 +3,14 @@ import {Breadcrumb, BreadcrumbItem, Form, FormGroup, Label, Col, Input, Button} 
 import {Link} from 'react-router-dom';
 
 
-function RenderContactSelect({doesAgree, handleInputChange}) {
+function RenderContactSelect({doesAgree, contactType, handleInputChange}) {
     if(doesAgree) {
         return(
             <Col md={{size: 3, offset: 1}}>
                 <Input type="select" name="contactType"
-                       value={doesAgree}
+                       value={contactType}
                        onChange={handleInputChange}>
+                    <option value="none">Choose One</option>
                     <option>Tel.</option>
                     <option>Email</option>
                 </Input>
@@ -17,7 +18,6 @@ function RenderContactSelect({doesAgree, handleInputChange}) {
         );
     }
     else {
-        console.log(doesAgree);
         return(
             <></>
         );
@@ -176,7 +176,7 @@ class ContactUs extends Component {
                                            />
                                     <Label className="font-weight-bold"> May We Contact You ?</Label>
                                 </Col>
-                                <RenderContactSelect doesAgree={this.state.doesAgree} handleInputChange={this.handleInputChange}/>
+                                <RenderContactSelect doesAgree={this.state.doesAgree} contactType={this.state.contactType} handleInputChange={this.handleInputChange}/>
                             </FormGroup>
                             <FormGroup className="text-center">
                                 <Col>
