@@ -136,7 +136,7 @@ class ContactUs extends Component {
                                 <Input type="text" 
                                        id="telNum" 
                                        name="telNum" 
-                                       placeholder="Type Your Telepj=hone Number"
+                                       placeholder="Type Your Telephone Number"
                                        value={this.state.telNum}
                                        onChange={this.handleInputChange}
                                        />
