@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Navbar, NavbarBrand, Nav, NavbarToggler, Collapse, NavItem, Jumbotron, Button, Modal, ModalHeader, ModalBody} from 'reactstrap'; 
+import { Navbar, NavbarBrand, Nav, NavbarToggler, Collapse, NavItem, Jumbotron,
+         Button, Modal, ModalHeader, ModalBody, Form, FormGroup, Input, Label} from 'reactstrap'; 
 import { NavLink } from 'react-router-dom'; 
 import { findAllByTestId } from '@testing-library/react';
 
@@ -80,7 +81,26 @@ class Header extends Component {
                         Login
                     </ModalHeader>
                     <ModalBody>
-                        
+                        <Form onSubmit={this.handleLogin}>
+                            <FormGroup>
+                                <Label htmlFor="username">
+                                    UserName
+                                </Label>
+                                <Input type="text" id="username" name="username"></Input>
+                            </FormGroup>
+                            <FormGroup>
+                                <Label htmlFor="password">
+                                    Password
+                                </Label>
+                                <Input type="text" id="password" name="password"></Input>
+                            </FormGroup>
+                            <FormGroup check>
+                                <Label check>
+                                    <Input type="checkbox" id="remember" name="remember"></Input>Remember me
+                                </Label>
+                            </FormGroup>
+                            <Button type="submit" value="submit" color="primary">Login</Button>
+                        </Form>
                     </ModalBody>
                 </Modal>
             </React.Fragment>
