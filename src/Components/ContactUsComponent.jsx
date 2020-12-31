@@ -46,8 +46,13 @@ class ContactUs extends Component {
     handleInputChange(event) {
         const value = event.target.type === 'checkbox' ? event.target.checked : event.target.value;
         const name = event.target.name;
-        this.setState({
-            [name]: value
+        /*Have to use a callback function as 'setState' function takes a while, which will  
+          make the if statement excute before 'setState' even if it's written after it.*/
+        this.setState({ [name]: value}, function () {
+            if(!this.state.doesAgree && this.state.contactType) {
+                console.log(this.state.doesAgree);
+                this.setState({contactType: ""});
+            }
         });
     }
 
