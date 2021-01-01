@@ -93,6 +93,11 @@ class Header extends Component {
                                 <Label htmlFor="username">
                                     UserName
                                 </Label>
+                                {
+                                /*Whenever I type this.username in any place in this component, 
+                                  It will refrence to a value of the typed input as I used the 'innerRef' attribute.
+                                  See the username, password, & remember inputs.
+                                */}
                                 <Input type="text" id="username" name="username"
                                     innerRef={(input) => this.username = input}  
                                 ></Input>
