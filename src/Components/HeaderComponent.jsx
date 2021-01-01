@@ -22,6 +22,13 @@ class Header extends Component {
         });
     }
 
+    handleLogin = (event) => {
+        alert(`Your user name is ${this.username.value},
+        your password is ${this.password.value} 
+        with boolean value ${this.remember.checked} to remember you`)
+        event.preventDefault();
+    }
+
     render() { 
         return ( 
             <React.Fragment>
@@ -86,17 +93,23 @@ class Header extends Component {
                                 <Label htmlFor="username">
                                     UserName
                                 </Label>
-                                <Input type="text" id="username" name="username"></Input>
+                                <Input type="text" id="username" name="username"
+                                    innerRef={(input) => this.username = input}  
+                                ></Input>
                             </FormGroup>
                             <FormGroup>
                                 <Label htmlFor="password">
                                     Password
                                 </Label>
-                                <Input type="text" id="password" name="password"></Input>
+                                <Input type="password" id="password" name="password"
+                                innerRef={(input) => this.password = input}
+                                ></Input>
                             </FormGroup>
                             <FormGroup check>
                                 <Label check>
-                                    <Input type="checkbox" id="remember" name="remember"></Input>Remember me
+                                    <Input type="checkbox" id="remember" name="remember"
+                                    innerRef={(input) => this.remember = input}
+                                    ></Input>Remember me
                                 </Label>
                             </FormGroup>
                             <Button type="submit" value="submit" color="primary">Login</Button>
