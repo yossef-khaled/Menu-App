@@ -150,8 +150,8 @@ class ContactUs extends Component {
                             </Row>
                             <Row className="text-centered form-group">
                                 <Col className="text-center mt-2">
-                                    <Control.check  
-                                           className="form-control"
+                                    <Control.checkbox 
+                                           className="mr-2"
                                            model=".doesAgree"
                                            id="doesAgree" 
                                            name="doesAgree"
