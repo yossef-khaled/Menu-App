@@ -3,27 +3,20 @@ import {Breadcrumb, BreadcrumbItem, Label, Col, Row, Button} from 'reactstrap';
 import {Link} from 'react-router-dom';
 import { Control, LocalForm, Errors } from 'react-redux-form';   
 
-function RenderContactSelect({doesAgree, contactType }) {
-    if(doesAgree) {
+function RenderContactSelect() {
         return(
             <Col md={{size: 3, offset: 1}}>
                 <Control.select
-                       className="form-control"
-                       model=".doesAgree" 
+                       className="form-control float-right border border-success"
+                       model=".contactType" 
                        name="contactType"
-                       value={contactType}>
+                       >
                     <option value="none">Choose One</option>
                     <option>Tel.</option>
                     <option>Email</option>
                 </Control.select>
             </Col>
         );
-    }
-    else {
-        return(
-            <></>
-        );
-    }
 };
 
 class ContactUs extends Component {
@@ -36,6 +29,10 @@ class ContactUs extends Component {
 
     handleSubmit(values) {
         alert('Current State is: ' + JSON.stringify(values));
+    }
+
+    handleChange(values) {
+        console.log(`DoesAgree after change is ${values.doesAgree}`);
     }
 
     render() {
@@ -82,7 +79,9 @@ class ContactUs extends Component {
                         <h2 className="mx-auto font-weight-bold mb-5">Reveal It To Us !</h2>
                     </div>
                     <div className="col-12 col-md-9">
-                        <LocalForm onSubmit={(values) => this.handleSubmit(values)}>
+                        <LocalForm onSubmit={(values) => this.handleSubmit(values)}
+                                   onChange={(values) => this.handleChange(values)}
+                        >
                             <Row className="form-group">
                                 <Label htmlFor="firstName" md={2}>First Name</Label>
                                 {/*The following col element is equivalent to :
@@ -149,17 +148,16 @@ class ContactUs extends Component {
                                 </Col>
                             </Row>
                             <Row className="text-centered form-group">
-                                <Col className="text-center mt-2">
-                                    <Control.checkbox 
+                                <Col className="border border-success mt-2">
+                                    <Control.checkbox
                                            className="mr-2"
                                            model=".doesAgree"
                                            id="doesAgree" 
                                            name="doesAgree"
                                            />
-                                    <Label className="font-weight-bold"> May We Contact You ?</Label>
+                                    <Label className="font-weight-bold text-align"> May We Contact You ?</Label>
+                                    <RenderContactSelect/>
                                 </Col>
-
-
                             </Row>
                             <Row className="text-center form-group">
                                 <Col>
