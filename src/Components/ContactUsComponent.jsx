@@ -7,7 +7,7 @@ function RenderContactSelect() {
         return(
             <Col md={{size: 3, offset: 1}}>
                 <Control.select
-                       className="form-control float-right border border-success"
+                       className="form-control mr-auto"
                        model=".contactType" 
                        name="contactType"
                        >
@@ -18,6 +18,12 @@ function RenderContactSelect() {
             </Col>
         );
 };
+
+const required = (val) => val && val.length;
+const maxLength = (len) => (val) => !(val) || (val.length <= len);
+const minLength = (len) => (val) => val && (val.length >= len);
+const isNumber = (val) => !isNaN(Number(val));
+const validEmail = (val) => /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(val);
 
 class ContactUs extends Component {
     
@@ -96,6 +102,19 @@ class ContactUs extends Component {
                                        id="firstName"
                                        name="firstName"
                                        placeholder="Type Your First Name"
+                                       validators={
+                                           {required, maxLength: maxLength(15), minLength: minLength(3)}
+                                       }
+                                       />
+                                       <Errors
+                                            className="text-danger"
+                                            model=".firstName"
+                                            show="touched"
+                                            messages={{
+                                             required: 'Required',
+                                             minLength: 'Must be greater than 2 characters',
+                                             maxLength: 'Must be 15 characters or less'
+                                            }}
                                        />
                                 </Col>
                             </Row>
@@ -108,7 +127,20 @@ class ContactUs extends Component {
                                        id="lastName"
                                        name="lastName" 
                                        placeholder="Type Your Last Name"
-                                       />
+                                       validators={
+                                        {required, maxLength: maxLength(15), minLength: minLength(3)}
+                                    }
+                                    />
+                                    <Errors
+                                         className="text-danger"
+                                         model=".lastName"
+                                         show="touched"
+                                         messages={{
+                                          required: 'Required ',
+                                          minLength: 'Must be greater than 2 characters',
+                                          maxLength: 'Must be 15 characters or less'
+                                         }}
+                                    />
                                 </Col>
                             </Row>
                             <Row className="form-group">
@@ -120,8 +152,22 @@ class ContactUs extends Component {
                                        id="telNum" 
                                        name="telNum" 
                                        placeholder="Type Your Telephone Number"
+                                       validators={{
+                                           required, maxLength: maxLength(15), minLength: minLength(10), isNumber
+                                       }}
                                        />
                                 </Col>
+                                <Errors
+                                    className="text-danger"
+                                    model=".telNum"
+                                    show="touched"
+                                    messages={{
+                                     required: 'Required. ',
+                                     minLength: 'Must be greater than 9 numbers. ',
+                                     maxLength: 'Must be 15 numbers or less. ',
+                                     isNumber: 'You can only type numbers.'
+                                    }}
+                                />
                             </Row>
                             <Row className="form-group">
                                 <Label htmlFor="email" md={2}>Email</Label>
@@ -132,8 +178,20 @@ class ContactUs extends Component {
                                        id="email" 
                                        name="email" 
                                        placeholder="Type Your Email"
-                                       />
-                                </Col>
+                                       validators={{
+                                        required, validEmail
+                                    }}
+                                    />
+                             </Col>
+                             <Errors
+                                 className="text-danger"
+                                 model=".email"
+                                 show="touched"
+                                 messages={{
+                                  required: 'Required. ',
+                                  validEmail: 'This email is invalid.'
+                                 }}
+                             />
                             </Row>
                             <Row className="form-group">
                                 <Label htmlFor="message" md={2}>Message</Label>
@@ -147,17 +205,15 @@ class ContactUs extends Component {
                                        />
                                 </Col>
                             </Row>
-                            <Row className="text-centered form-group">
-                                <Col className="border border-success mt-2">
+                            <Row className="form-group">
                                     <Control.checkbox
-                                           className="mr-2"
+                                           className="mt-1 mr-1"
                                            model=".doesAgree"
                                            id="doesAgree" 
                                            name="doesAgree"
                                            />
-                                    <Label className="font-weight-bold text-align"> May We Contact You ?</Label>
+                                    <Label className="font-weight-bold"> May We Contact You ?</Label>
                                     <RenderContactSelect/>
-                                </Col>
                             </Row>
                             <Row className="text-center form-group">
                                 <Col>
