@@ -1,13 +1,8 @@
 import {
-    Row,
-    Card,
-    CardImg,
-    CardTitle,
-    CardText,
-    Breadcrumb,
-    BreadcrumbItem,
-  } from "reactstrap";  
+    Row, Card, CardImg, CardTitle, CardText, Breadcrumb, BreadcrumbItem, Button, 
+    Modal, ModalHeader, ModalBody, Form, FormGroup, Input, Label } from "reactstrap";  
 import {Link} from 'react-router-dom';
+import '../App.css'
 
 function DishDetail({dish, comments}) {
     const dishComments = comments.map((comment) => {
@@ -51,8 +46,14 @@ function DishDetail({dish, comments}) {
                         <h3>Comments :</h3>
                         {dishComments.length > 0 ? dishComments : <p className="ml-3 text-muted">- There is no comments for this dish</p>}
                     </div>
+                <Button outline color="info" className="submitComment" width="50%">Submit Comment</Button>
                 </Card>
             </Row>
+            <Modal>
+                {/*TODO...
+                   a modal that contains a form to submit a comment 
+                 */}
+            </Modal>
         </div>
     );
 }
