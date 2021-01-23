@@ -6,12 +6,20 @@ import {Link} from 'react-router-dom';
 import '../App.css'
 
 class  DishDetail extends Component {
-    constructor(props) {
-        super(props);
+    
+    state = {
+        isModalOpen: false
+    }   
 
-        this.state = {
+    toggleModal = () => {
+        this.setState({
+            isModalOpen: !this.state.isModalOpen
+        })
+    }
 
-        }
+    handleLogin = (event) => {
+        alert(`You submitted a comment`)
+        event.preventDefault();
     }
 
     render() {
@@ -57,13 +65,28 @@ class  DishDetail extends Component {
                             <h3>Comments :</h3>
                             {dishComments.length > 0 ? dishComments : <p className="ml-3 text-muted">- There is no comments for this dish</p>}
                         </div>
-                    <Button outline color="info" className="submitComment" width="50%">Submit Comment</Button>
+                    <Button outline color="info" onClick={this.toggleModal} className="submitComment" width="50%">Submit Comment</Button>
                     </Card>
                 </Row>
-                <Modal>
-                    <ModalHeader isOpen={}>
+                <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
+                    <ModalHeader toggle={this.toggleModal}>
                         Submit Comment
                     </ModalHeader>
+                    <Form onSubmit={this.handleLogin}>
+                        <FormGroup>
+                            <Label htmlFor="rate">
+                                Rate this dish
+                            </Label>
+                                <select name="rate">
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                </select>
+                        </FormGroup>
+                        <Button type="submit">Submit</Button>
+                    </Form>
                 </Modal>
             </div>
         );
