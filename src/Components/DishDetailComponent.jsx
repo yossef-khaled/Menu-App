@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import {
     Row, Card, CardImg, CardTitle, CardText, Breadcrumb, BreadcrumbItem, Button, 
     Modal, ModalHeader, ModalBody, Form, FormGroup, Input, Label } from "reactstrap";  
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { Control, LocalForm, Errors } from 'react-redux-form';
 import '../App.css'
 
 class  DishDetail extends Component {
@@ -73,17 +74,39 @@ class  DishDetail extends Component {
                         Submit Comment
                     </ModalHeader>
                     <Form onSubmit={this.handleLogin}>
-                        <FormGroup>
-                            <Label htmlFor="rate">
+                        <FormGroup className="mt-2">
+                            <Label htmlFor="rate" className="ml-1 mr-2 text-bold">
+                                <strong>
                                 Rate this dish
+                                </strong>
                             </Label>
-                                <select name="rate">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
+                                <select name="rate" className="w-25 float-right mr-3">
+                                    <option>1- Very Bad</option>
+                                    <option>2- Bad</option>
+                                    <option>3- Good</option>
+                                    <option>4- Very Good</option>
+                                    <option>5- Excellent</option>
                                 </select>
+                        </FormGroup>
+                        <hr/>
+                        <FormGroup>
+                            <Label htmlFor="userName">
+                                <strong>
+                                    Enter your name
+                                </strong>
+                            </Label>
+                            <input type="text" id="userName" name="userName" />
+                        </FormGroup>
+                        <hr/>
+                        <FormGroup>
+                            <Label htmlFor="comment">
+                                <strong>
+                                    Comment
+                                </strong>
+                            </Label>
+                            <Row>
+                                <textarea type="textarea" id="comment" name="comment" className="ml-3 w-75 "/>
+                            </Row>
                         </FormGroup>
                         <Button type="submit">Submit</Button>
                     </Form>
