@@ -18,9 +18,12 @@ class  DishDetail extends Component {
         })
     }
 
-    handleLogin = (event) => {
-        alert(`You submitted a comment`)
-        event.preventDefault();
+    handleLogin = (values) => {
+        alert(`You submitted a comment with : ${JSON.stringify(values)}`);
+    }
+
+    handleChange = (values) => {
+        console.log(`You changed ${values}`);
     }
 
     render() {
@@ -73,43 +76,63 @@ class  DishDetail extends Component {
                     <ModalHeader toggle={this.toggleModal}>
                         Submit Comment
                     </ModalHeader>
-                    <Form onSubmit={this.handleLogin}>
-                        <FormGroup className="mt-2">
-                            <Label htmlFor="rate" className="ml-1 mr-2 text-bold">
+                    <LocalForm onSubmit={(values) => this.handleLogin(values)}
+                                onChange={(values) => this.handleChange(values)}
+                    >
+                        <Row className="mt-2">
+                            <Label htmlFor="rate" className="ml-5 mr-auto text-bold">
                                 <strong>
                                 Rate this dish
                                 </strong>
                             </Label>
-                                <select name="rate" className="w-25 float-right mr-3">
-                                    <option>1- Very Bad</option>
-                                    <option>2- Bad</option>
-                                    <option>3- Good</option>
-                                    <option>4- Very Good</option>
-                                    <option>5- Excellent</option>
-                                </select>
-                        </FormGroup>
+                                <Control.select 
+                                        className="mr-3 border border-success" 
+                                        name="rate" 
+                                        model=".rate"
+                                        id="rate"
+                                        className="w-25 float-right mr-3">
+                                            <option value="none">No rate</option>
+                                            <option>1- Very Bad</option>
+                                            <option>2- Bad</option>
+                                            <option>3- Good</option>
+                                            <option>4- Very Good</option>
+                                            <option>5- Excellent</option>
+                                </Control.select>
+                        </Row>
                         <hr/>
-                        <FormGroup>
-                            <Label htmlFor="userName">
+                        <Row>
+                            <Label htmlFor="username" className="ml-5 mr-auto">
                                 <strong>
                                     Enter your name
                                 </strong>
                             </Label>
-                            <input type="text" id="userName" name="userName" />
-                        </FormGroup>
+                            <Control.text 
+                                className="mr-auto" 
+                                id="username" 
+                                name="username"
+                                model=".username"
+                                placeholder="Type your name"
+                                />
+                        </Row>
                         <hr/>
-                        <FormGroup>
-                            <Label htmlFor="comment">
+                        <Row>
+                            <Label htmlFor="comment" className="ml-5 mr-auto">
                                 <strong>
                                     Comment
                                 </strong>
                             </Label>
                             <Row>
-                                <textarea type="textarea" id="comment" name="comment" className="ml-3 w-75 "/>
+                                <Control.textarea
+                                    className="ml-3 w-75"
+                                    id="comment"
+                                    name="comment" 
+                                    model=".comment"
+                                    placeholder="Type your comment"
+                                />
                             </Row>
-                        </FormGroup>
-                        <Button type="submit">Submit</Button>
-                    </Form>
+                        </Row>
+                        <Button type="submit" className="post">Post</Button>
+                    </LocalForm>
                 </Modal>
             </div>
         );
