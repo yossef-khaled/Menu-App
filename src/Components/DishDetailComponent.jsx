@@ -5,6 +5,12 @@ import {
 import { Link } from 'react-router-dom';
 import { Control, LocalForm, Errors } from 'react-redux-form';
 import '../App.css'
+import Col from 'reactstrap/lib/Col';
+
+const required = (val) => val && val.length;
+const minLength = (len) => (val) => val && (val.length >= len);
+const maxLength = (len) => (val) => !(val) || (val.length <= len);
+const isRate = (val) => val && val !== 'none';
 
 class  DishDetail extends Component {
     
@@ -23,7 +29,8 @@ class  DishDetail extends Component {
     }
 
     handleChange = (values) => {
-        console.log(`You changed ${values}`);
+        console.log(`You changed ${JSON.stringify(values)}`);
+        console.log(`You changed rate ${values.rate}`);
     }
 
     render() {
@@ -86,11 +93,15 @@ class  DishDetail extends Component {
                                 </strong>
                             </Label>
                                 <Control.select 
-                                        className="mr-3 border border-success" 
+                                        className="mr-auto"  
                                         name="rate" 
                                         model=".rate"
                                         id="rate"
-                                        className="w-25 float-right mr-3">
+                                        className="w-25 float-right mr-3"
+                                        validators={{
+                                            isRate: isRate
+                                        }}
+                                        >
                                             <option value="none">No rate</option>
                                             <option>1- Very Bad</option>
                                             <option>2- Bad</option>
@@ -98,6 +109,16 @@ class  DishDetail extends Component {
                                             <option>4- Very Good</option>
                                             <option>5- Excellent</option>
                                 </Control.select>
+                                <Row>
+                                    <Errors
+                                        className="text-danger"
+                                        show="touched"
+                                        model=".rate"
+                                        messages={{
+                                            isRate: 'Please, give a rate to the dish'
+                                        }}
+                                    />
+                                </Row>
                         </Row>
                         <hr/>
                         <Row>
@@ -112,7 +133,20 @@ class  DishDetail extends Component {
                                 name="username"
                                 model=".username"
                                 placeholder="Type your name"
+                                validators={{
+                                    required, minLength: minLength(2), maxLength: maxLength(15)
+                                }}
                                 />
+                            <Errors
+                                className="text-danger ml-5"
+                                model=".username"
+                                show="touched"
+                                messages={{
+                                    required:"Please, enter your name.",
+                                    minLength:" Your name must be greater than 2 charachtars.",
+                                    maxLength:" Your name must be less than 15 charachtars."
+                                }}
+                            />
                         </Row>
                         <hr/>
                         <Row>
@@ -123,11 +157,22 @@ class  DishDetail extends Component {
                             </Label>
                             <Row>
                                 <Control.textarea
-                                    className="ml-3 w-75"
+                                    className="w-75"
                                     id="comment"
                                     name="comment" 
                                     model=".comment"
                                     placeholder="Type your comment"
+                                    validators={{
+                                        required
+                                    }}
+                                />
+                                <Errors
+                                    className="text-danger ml-5"
+                                    show="touched"
+                                    model=".comment"
+                                    messages={{
+                                        required: "Please write a comment."
+                                    }}
                                 />
                             </Row>
                         </Row>
