@@ -44,9 +44,49 @@ address{
     margin-right: auto;
 }
 
+.showBoundries1{
+    background-color: #512DA8;
+}
+
+.showBoundries2 {
+    background-color: brown;
+}
+
 .post {
     width: 25%;
     margin-top: 2em;
     margin-left: 11em;
-    margin-bottom: 1em;    
+    margin-bottom: 1em;
+}
+
+.commentRateContainer {
+    width: 90%;
+    margin-right: auto;
+    margin-left: auto;
+    display: flex;
+}
+
+.commentRate {
+    width: 100%;
+    height: 2em;
+}
+
+.commentWriter {
+    width: 90%;
+    height: 2.5em;
+    border-radius: 0.25em;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.comment {
+    width: 90%;
+    height: 6em;
+    border-radius: 0.25em;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+hr {
+    width: 95%;
 }

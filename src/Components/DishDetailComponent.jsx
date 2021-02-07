@@ -4,7 +4,7 @@ import {
     Modal, ModalHeader, ModalBody, Form, FormGroup, Input, Label } from "reactstrap";  
 import { Link } from 'react-router-dom';
 import { Control, LocalForm, Errors } from 'react-redux-form';
-import '../App.css'
+import '../App.css';
 import Col from 'reactstrap/lib/Col';
 
 const required = (val) => val && val.length;
@@ -81,37 +81,37 @@ class  DishDetail extends Component {
                 </Row>
                 <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
                     <ModalHeader toggle={this.toggleModal}>
-                        Submit Comment
+                        <strong>
+                            Submit Comment
+                        </strong>
                     </ModalHeader>
                     <LocalForm onSubmit={(values) => this.handleLogin(values)}
                                 onChange={(values) => this.handleChange(values)}
                     >
-                        <Row className="mt-2">
-                            <Label htmlFor="rate" className="ml-5 mr-auto text-bold">
-                                <strong>
+                            <Label htmlFor="rate" className="ml-2 mt-2">
                                 Rate this dish
-                                </strong>
                             </Label>
-                                <Control.select 
-                                        className="mr-auto"  
-                                        name="rate" 
-                                        model=".rate"
-                                        id="rate"
-                                        className="w-25 float-right mr-3"
-                                        validators={{
-                                            isRate: isRate
-                                        }}
-                                        >
-                                            <option value="none">No rate</option>
-                                            <option>1- Very Bad</option>
-                                            <option>2- Bad</option>
-                                            <option>3- Good</option>
-                                            <option>4- Very Good</option>
-                                            <option>5- Excellent</option>
-                                </Control.select>
-                                <Row>
+                                <Row className="">
+                                    <div className="commentRateContainer">
+                                        <Control.select 
+                                                className="commentRate border"  
+                                                name="rate" 
+                                                model=".rate"
+                                                id="rate"
+                                                validators={{
+                                                    isRate: isRate
+                                                }}
+                                                >
+                                                    <option value="none">No rate</option>
+                                                    <option>1. Very Bad</option>
+                                                    <option>2. Bad</option>
+                                                    <option>3. Good</option>
+                                                    <option>4. Very Good</option>
+                                                    <option>5. Excellent</option>
+                                        </Control.select>
+                                    </div>
                                     <Errors
-                                        className="text-danger"
+                                        className="text-danger ml-5"
                                         show="touched"
                                         model=".rate"
                                         messages={{
@@ -119,45 +119,39 @@ class  DishDetail extends Component {
                                         }}
                                     />
                                 </Row>
-                        </Row>
                         <hr/>
-                        <Row>
-                            <Label htmlFor="username" className="ml-5 mr-auto">
-                                <strong>
+                            <Label htmlFor="username" className="ml-2">
                                     Enter your name
-                                </strong>
                             </Label>
-                            <Control.text 
-                                className="mr-auto" 
-                                id="username" 
-                                name="username"
-                                model=".username"
-                                placeholder="Type your name"
-                                validators={{
-                                    required, minLength: minLength(2), maxLength: maxLength(15)
-                                }}
+                            <Row>
+                                <Control.text
+                                    className="commentWriter border"  
+                                    id="username" 
+                                    name="username"
+                                    model=".username"
+                                    placeholder="Type your name"
+                                    validators={{
+                                        required, minLength: minLength(2), maxLength: maxLength(15)
+                                    }}
+                                    />
+                                <Errors
+                                    className="text-danger ml-5 w-75"
+                                    model=".username"
+                                    show="touched"
+                                    messages={{
+                                        required:"Please, enter your name.",
+                                        minLength:" Your name must be greater than or equal to 2 charachtars.",
+                                        maxLength:" Your name must be less than 15 charachtars."
+                                    }}
                                 />
-                            <Errors
-                                className="text-danger ml-5"
-                                model=".username"
-                                show="touched"
-                                messages={{
-                                    required:"Please, enter your name.",
-                                    minLength:" Your name must be greater than 2 charachtars.",
-                                    maxLength:" Your name must be less than 15 charachtars."
-                                }}
-                            />
-                        </Row>
+                            </Row>
                         <hr/>
-                        <Row>
-                            <Label htmlFor="comment" className="ml-5 mr-auto">
-                                <strong>
+                            <Label htmlFor="comment" className="ml-2">
                                     Comment
-                                </strong>
                             </Label>
                             <Row>
                                 <Control.textarea
-                                    className="w-75"
+                                    className="comment border"
                                     id="comment"
                                     name="comment" 
                                     model=".comment"
@@ -171,11 +165,10 @@ class  DishDetail extends Component {
                                     show="touched"
                                     model=".comment"
                                     messages={{
-                                        required: "Please write a comment."
+                                        required: "Please, write a comment."
                                     }}
                                 />
                             </Row>
-                        </Row>
                         <Button type="submit" className="post">Post</Button>
                     </LocalForm>
                 </Modal>
