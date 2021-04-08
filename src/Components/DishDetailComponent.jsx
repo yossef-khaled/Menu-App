@@ -5,7 +5,6 @@ import {
 import { Link } from 'react-router-dom';
 import { Control, LocalForm, Errors } from 'react-redux-form';
 import '../App.css';
-import Col from 'reactstrap/lib/Col';
 
 const required = (val) => val && val.length;
 const minLength = (len) => (val) => val && (val.length >= len);
@@ -24,14 +23,10 @@ class  DishDetail extends Component {
         })
     }
 
-    handleLogin = (values) => {
-        alert(`You submitted a comment with : ${JSON.stringify(values)}`);
+    handleCommentSubmit = (event) => {
+        alert(`You submitted a comment with : ${JSON.stringify(event)}`);
     }
 
-    handleChange = (values) => {
-        console.log(`You changed ${JSON.stringify(values)}`);
-        console.log(`You changed rate ${values.rate}`);
-    }
 
     render() {
 
@@ -85,11 +80,12 @@ class  DishDetail extends Component {
                             Submit Comment
                         </strong>
                     </ModalHeader>
-                    <LocalForm onSubmit={(values) => this.handleLogin(values)}
-                                onChange={(values) => this.handleChange(values)}
+                    <LocalForm onSubmit={this.handleCommentSubmit}
                     >
                             <Label htmlFor="rate" className="ml-2 mt-2">
-                                Rate this dish
+                                <strong>
+                                    Rate this dish
+                                </strong>
                             </Label>
                                 <Row className="">
                                     <div className="commentRateContainer">
@@ -121,7 +117,9 @@ class  DishDetail extends Component {
                                 </Row>
                         <hr/>
                             <Label htmlFor="username" className="ml-2">
+                                <strong>
                                     Enter your name
+                                </strong>
                             </Label>
                             <Row>
                                 <Control.text
@@ -147,7 +145,9 @@ class  DishDetail extends Component {
                             </Row>
                         <hr/>
                             <Label htmlFor="comment" className="ml-2">
+                                <strong>
                                     Comment
+                                </strong>
                             </Label>
                             <Row>
                                 <Control.textarea
