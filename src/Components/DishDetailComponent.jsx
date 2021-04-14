@@ -24,7 +24,7 @@ class  DishDetail extends Component {
     }
 
     handleCommentSubmit = (event) => {
-        alert(`You submitted a comment with : ${JSON.stringify(event)}`);
+        this.props.addComment(this.props.dish.id, event.rating, event.author, event.comment);
     }
 
 
@@ -34,9 +34,12 @@ class  DishDetail extends Component {
             return(
                 <div className="m-3">
                     <hr/>
-                    <CardTitle tag="h4">
+                    <CardTitle tag="h4" className="commentAuthor">
                         {comment.author}
                     </CardTitle>
+                    <CardText className="commentDate">
+                        {comment.date}
+                    </CardText>
                     <CardText>
                         {comment.comment}
                     </CardText>           
@@ -82,7 +85,7 @@ class  DishDetail extends Component {
                     </ModalHeader>
                     <LocalForm onSubmit={this.handleCommentSubmit}
                     >
-                            <Label htmlFor="rate" className="ml-2 mt-2">
+                            <Label htmlFor="rating" className="ml-2 mt-2">
                                 <strong>
                                     Rate this dish
                                 </strong>
@@ -91,14 +94,14 @@ class  DishDetail extends Component {
                                     <div className="commentRateContainer">
                                         <Control.select 
                                                 className="commentRate border"  
-                                                name="rate" 
-                                                model=".rate"
-                                                id="rate"
+                                                name="rating" 
+                                                model=".rating"
+                                                id="rating"
                                                 validators={{
                                                     isRate: isRate
                                                 }}
                                                 >
-                                                    <option value="none">No rate</option>
+                                                    <option value="none">No rating</option>
                                                     <option>1. Very Bad</option>
                                                     <option>2. Bad</option>
                                                     <option>3. Good</option>
@@ -109,14 +112,14 @@ class  DishDetail extends Component {
                                     <Errors
                                         className="text-danger ml-5"
                                         show="touched"
-                                        model=".rate"
+                                        model=".rating"
                                         messages={{
                                             isRate: 'Please, give a rate to the dish'
                                         }}
                                     />
                                 </Row>
                         <hr/>
-                            <Label htmlFor="username" className="ml-2">
+                            <Label htmlFor="author" className="ml-2">
                                 <strong>
                                     Enter your name
                                 </strong>
@@ -124,9 +127,9 @@ class  DishDetail extends Component {
                             <Row>
                                 <Control.text
                                     className="commentWriter border"  
-                                    id="username" 
-                                    name="username"
-                                    model=".username"
+                                    id="author" 
+                                    name="author"
+                                    model=".author"
                                     placeholder="Type your name"
                                     validators={{
                                         required, minLength: minLength(2), maxLength: maxLength(15)
@@ -134,7 +137,7 @@ class  DishDetail extends Component {
                                     />
                                 <Errors
                                     className="text-danger ml-5 w-75"
-                                    model=".username"
+                                    model=".author"
                                     show="touched"
                                     messages={{
                                         required:"Please, enter your name.",
