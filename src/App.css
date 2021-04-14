@@ -90,3 +90,15 @@ address{
 hr {
     width: 95%;
 }
+
+.commentAuthor {
+    display: inline;
+}
+
+.commentDate {
+    display: inline;
+    color: #8f8f8f;
+    font-family: 'Ink Free';
+    margin-left: 1em;
+    /*float: right;*/
+}
