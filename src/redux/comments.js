@@ -7,8 +7,9 @@ export const Comments = (state = COMMENTS, action) => {
                     var comment = action.payLoad;
                     comment.id = state.length;
                     comment.date = new Date().toISOString();
-                    console.log(`The recently added comment is ${comment}`);
+                    console.log(`The recently added comment is : ${comment.rating} ${comment.author} ${comment.comment}`);
                     return state.concat(comment);
+
                 default:
                     return state;
           }
