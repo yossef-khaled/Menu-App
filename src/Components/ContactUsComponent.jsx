@@ -2,22 +2,7 @@ import React, { Component } from 'react';
 import {Breadcrumb, BreadcrumbItem, Label, Col, Row, Button} from 'reactstrap';
 import {Link} from 'react-router-dom';
 import { Control, LocalForm, Errors } from 'react-redux-form';   
-
-function RenderContactSelect() {
-        return(
-            <Col md={{size: 3, offset: 1}}>
-                <Control.select
-                       className="form-control mr-auto"
-                       model=".contactType" 
-                       name="contactType"
-                       >
-                    <option value="none">Choose One</option>
-                    <option>Tel.</option>
-                    <option>Email</option>
-                </Control.select>
-            </Col>
-        );
-};
+import ContactType from './ContactType';
 
 const required = (val) => val && val.length;
 const maxLength = (len) => (val) => !(val) || (val.length <= len);
@@ -26,9 +11,13 @@ const isNumber = (val) => !isNaN(Number(val));
 const validEmail = (val) => /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(val);
 
 class ContactUs extends Component {
-    
+
+    state = {
+        isShown : false
+    };
+
     constructor(props) {
-        super(props);
+        super(props);   
 
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -38,7 +27,10 @@ class ContactUs extends Component {
     }
 
     handleChange(values) {
-        console.log(`DoesAgree after change is ${values.doesAgree}`);
+        this.setState({isShown : values.doesAgree}, () => {
+            console.log(`DoesAgree as a state after change is ${this.state.doesAgree}`);
+            console.log('----------------------------------------------------------');
+        });
     }
 
     render() {
@@ -82,7 +74,7 @@ class ContactUs extends Component {
                 </div>
                 <div className="container row row-content">
                     <div className="row col-12">
-                        <h2 className="mx-auto font-weight-bold mb-5">Reveal It To Us !</h2>
+                        <h2 className="mx-auto font-weight-bold mb-5">Reveal it to us !</h2>
                     </div>
                     <div className="col-12 col-md-9">
                         <LocalForm onSubmit={(values) => this.handleSubmit(values)}
@@ -103,7 +95,7 @@ class ContactUs extends Component {
                                        name="firstName"
                                        placeholder="Type Your First Name"
                                        validators={
-                                           {required, maxLength: maxLength(15), minLength: minLength(3)}
+                                           {required, maxLength: maxLength(15), minLength: minLength(2)}
                                        }
                                        />
                                        <Errors
@@ -111,9 +103,9 @@ class ContactUs extends Component {
                                             model=".firstName"
                                             show="touched"
                                             messages={{
-                                             required: 'Required',
-                                             minLength: 'Must be greater than 2 characters',
-                                             maxLength: 'Must be 15 characters or less'
+                                             required: 'Required.',
+                                             minLength: ' Must be at least 2 charachters.',
+                                             maxLength: ' Must be 15 characters at max.'
                                             }}
                                        />
                                 </Col>
@@ -128,7 +120,7 @@ class ContactUs extends Component {
                                        name="lastName" 
                                        placeholder="Type Your Last Name"
                                        validators={
-                                        {required, maxLength: maxLength(15), minLength: minLength(3)}
+                                        {required, maxLength: maxLength(15), minLength: minLength(2)}
                                     }
                                     />
                                     <Errors
@@ -136,9 +128,9 @@ class ContactUs extends Component {
                                          model=".lastName"
                                          show="touched"
                                          messages={{
-                                          required: 'Required ',
-                                          minLength: 'Must be greater than 2 characters',
-                                          maxLength: 'Must be 15 characters or less'
+                                          required: 'Required.',
+                                          minLength: ' Must be at least 2 charachters.',
+                                          maxLength: ' Must be 15 characters at max.'
                                          }}
                                     />
                                 </Col>
@@ -163,9 +155,9 @@ class ContactUs extends Component {
                                     show="touched"
                                     messages={{
                                      required: 'Required. ',
-                                     minLength: 'Must be greater than 9 numbers. ',
-                                     maxLength: 'Must be 15 numbers or less. ',
-                                     isNumber: 'You can only type numbers.'
+                                     minLength: ' Must be greater than 9 numbers.',
+                                     maxLength: ' Must be 15 numbers or less. ',
+                                     isNumber: ' You can only type numbers.'
                                     }}
                                 />
                             </Row>
@@ -213,7 +205,7 @@ class ContactUs extends Component {
                                            name="doesAgree"
                                            />
                                     <Label className="font-weight-bold"> May We Contact You ?</Label>
-                                    <RenderContactSelect/>
+                                    {this.state.isShown && <ContactType/>}
                             </Row>
                             <Row className="text-center form-group">
                                 <Col>
