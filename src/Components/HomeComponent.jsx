@@ -2,7 +2,9 @@ import React from 'react';
 import RenderCard from './RenderCard';
 import {Breadcrumb, BreadcrumbItem} from 'reactstrap';
 import {Link} from 'react-router-dom';
-function Home (props) {
+
+function Home (...props) {
+    console.log(`At the Home Component dish is : ${props.dish}`);   
     return(
         <div className="container">
             <div className="row m-2">
@@ -13,7 +15,7 @@ function Home (props) {
             </div>
             <div className="row align-items-start">
                 <div className="col-12 col-md m-1">
-                    <RenderCard item={props.dish} />
+                    <RenderCard item={props.dish} isLoading={props.dishesLoading} errMess={props.dishesErrMess}/>
                 </div>
                 <div className="col-12 col-md m-1">
                     <RenderCard item={props.promotion} />
