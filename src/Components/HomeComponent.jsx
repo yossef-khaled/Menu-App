@@ -3,7 +3,7 @@ import RenderCard from './RenderCard';
 import {Breadcrumb, BreadcrumbItem} from 'reactstrap';
 import {Link} from 'react-router-dom';
 
-function Home (...props) {
+function Home (props) {
     console.log(`At the Home Component dish is : ${props.dish}`);   
     return(
         <div className="container">
