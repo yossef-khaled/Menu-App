@@ -9,7 +9,7 @@ export const Promotions = (state = {
                 case ActionTypes.ADD_PROPMOS:
                     return {...state, isLoading: false, errMess: null, promos: action.payload};
                     
-                case ActionTypes.PROMOS_LOADINFG:
+                case ActionTypes.PROMOS_LOADING:
                     return {...state, isLoading: true, errMess: null, promos: []}
     
                 case ActionTypes.PROPMOS_FAILED:
