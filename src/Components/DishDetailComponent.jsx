@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { Control, LocalForm, Errors } from 'react-redux-form';
 import '../App.css';
 import { LoadingSpinner } from './LoadingComponent';
+import { baseUrl } from '../Shared/baseUrl';
 
 const required = (val) => val && val.length;
 const minLength = (len) => (val) => val && (val.length >= len);
@@ -82,7 +83,7 @@ class  DishDetail extends Component {
                         </div>
                     </Row>
                     <Row className="align-items-start">
-                        <CardImg width="100%" className="col-6" src={this.props.dish.image} alt={this.props.dish.name} />
+                        <CardImg width="100%" className="col-6" src={ baseUrl + this.props.dish.image} alt={this.props.dish.name} />
                         <Card className="col-5">
                             <CardTitle className="m-2" tag="h4">
                                     {this.props.dish.name} :

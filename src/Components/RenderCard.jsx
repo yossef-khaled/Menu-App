@@ -1,5 +1,6 @@
 import React from 'react';
 import { Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle } from 'reactstrap';
+import { baseUrl } from '../Shared/baseUrl';
 import { LoadingSpinner } from './LoadingComponent'; 
 
 function RenderCard({item, isLoading, errMess}) {
@@ -16,10 +17,10 @@ function RenderCard({item, isLoading, errMess}) {
     }
 
     else {
-        console.log(`At the Render Card Component dish is : ${item}`);
+        console.log(`At the Render Card Component item is : ${JSON.stringify(item)}`);
         return (
             <Card>
-                <CardImg src={item.image} alt={item.name}/>
+                <CardImg src={baseUrl + item.image} alt={item.name}/>
                 <CardBody>
                     <CardTitle>
                         {item.name}
