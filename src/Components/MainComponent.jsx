@@ -22,10 +22,10 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = (dispatch) => ({
   addComment: (dishId, rating, author, comment) => dispatch(addComment(dishId, rating, author, comment)),
-  fetchDishes: () => {dispatch(fetchDishes())},
-  resetFeedbackForm: () => {dispatch(actions.reset('feedback'))},
-  fetchComments: () => dispatch(fetchComments()),
-  fetchPromos: () => dispatch(fetchPromos())
+  fetchDishes: () => dispatch(fetchDishes()),
+  resetFeedbackForm: () => dispatch(actions.reset('feedback')),
+  fetchPromos: () => dispatch(fetchPromos()),
+  fetchComments: () => dispatch(fetchComments())
 });
 
 class Main extends Component {
@@ -41,36 +41,38 @@ class Main extends Component {
     this.props.fetchComments();
     this.props.fetchPromos();
   }
-  
+
   handleCardClick(id) {
     this.setState({selectedDish: id});
     console.log(`A Card With ID ${id} Was CLICKED !!`);
   }
 
   render() {    
-    console.log(`At the Main Component dish is : ${this.props.dishes.dishes.filter((dish) => dish.featured)[0]}`);
+    console.log(`At the Main Component dishes are : ${JSON.stringify(this.props.dishes.dishes)}`);
+    console.log(`At the Main Component promos are : ${JSON.stringify(this.props.promotions.promos)}`);
     const HomePage = () => {
         return (
           <Home 
             dish={this.props.dishes.dishes.filter((dish) => dish.featured)[0]} 
-            dishesLoading={this.props.dishes.isLoading}
-            dishesErrMess={this.props.dishes.errMess}
-            promotion={this.props.promotions.promotions.filter((promotion) => promotion.featured)[0]}
-            promotionIsLoading={this.props.promotions.isLoading}
+            dishLoading={this.props.dishes.isLoading}
+            dishErrMess={this.props.dishes.errMess}
+            promotion={this.props.promotions.promos.filter((promotion) => promotion.featured)[0]}
+            promotionLoading={this.props.promotions.isLoading}
             promotionErrMess={this.props.promotions.errMess}
             leader={this.props.leaders.filter((leader) => leader.featured)[0]}      
            />
         );
-    }
+    } 
 
     const SpecificDish = ({match, location, history}) => {
       console.log(`At the Main Component dish is : ${this.props.dishes.dishes.filter((dish) => dish.featured)[0]}`);
+      console.log(`At the Main Component comments are : ${this.props.comments.comments}`);
       return(
         <DishDetail 
           dish={this.props.dishes.dishes[parseInt(match.params.dishId)]}          
           dishIsLoading={this.props.dishes.isLoading}
           dishErrMess={this.props.dishes.errMess}
-          comments={this.props.comments.filter((comment) => comment.dishId === parseInt(match.params.dishId, 10))}
+          comments={this.props.comments.comments.filter((comment) => comment.dishId === parseInt(match.params.dishId, 10))}
           commentsErrMess={this.props.comments.errMess}
           addComment={this.props.addComment}
         />
@@ -81,7 +83,16 @@ class Main extends Component {
     <div>
       <Header />
       <Switch>
-        <Route path="/home" component={HomePage} />
+        <Route path="/home" component={() => 
+          <Home 
+            dish={this.props.dishes.dishes.filter((dish) => dish.featured)[0]} 
+            dishLoading={this.props.dishes.isLoading}
+            dishErrMess={this.props.dishes.errMess}
+            promotion={this.props.promotions.promos.filter((promotion) => promotion.featured)[0]}
+            promotionLoading={this.props.promotions.isLoading}
+            promotionErrMess={this.props.promotions.errMess}
+            leader={this.props.leaders.filter((leader) => leader.featured)[0]}/>}
+          />
         <Route exact path="/contactus" component={() => <ContactUs resetFeedbackForm={this.props.resetFeedbackForm} />}/>
         <Route exact path="/menu" component={() => <Menu dishes={this.props.dishes} selectedDish={this.props.selectedDish } handleCardClick={(id) => this.handleCardClick(id)}/>}/>
         <Route path="/menu/:dishId" component={SpecificDish}/>
@@ -94,4 +105,3 @@ class Main extends Component {
 }
  
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Main));
-
