@@ -12,12 +12,12 @@ export const addComment = (dishId, rating, author, comment) => ({
     } 
 });
 
-export const fetchDishes = () => (dispatch) => { 
+export const fetchDishes = () => async (dispatch) => { 
     dispatch(dishesLoading(true));
 
     return fetch(`${baseUrl}dishes`)
     .then((responce) => responce.json())
-    .then((data) => dispatch(addDishes(data)));
+    .then((data) => dispatch(addDishes(data), console.log(`At the ACTION dishes are ${JSON.stringify(data)}`)))
 };
 
 export const dishesLoading = () => ({
@@ -45,19 +45,19 @@ export const commentsFailed = (errMess) => ({
     payload: errMess
 });
 
-export const fetchPromos = (dispatch) => {
+export const fetchPromos = () => async (dispatch) => {
     dispatch(promosLoading())
     
-    fetch(`${baseUrl}promos`)
-    .then((responce) => responce.json)
-    .then((data) => dispatch(addPromos(data)));
+    return fetch(`${baseUrl}promotions`)
+    .then((responce) => responce.json())
+    .then((data) => dispatch(addPromos(data), console.log(`at the ACTION Promos are : ${JSON.stringify(data)}`)))
 };
 
 
-export const fetchComments = (dispatch) => {
-    return fetch(`${baseUrl}comments`)
-    .then((responce) => responce.json())
-    .then((data) => dispatch(addComments(data)));
+export const fetchComments = () => async (dispatch) => {
+    const responce = await fetch(`${baseUrl}comments`);
+    const data = await responce.json();
+    return dispatch(addComments(data));
 };
 
 export const addPromos = (promos) => ({
@@ -66,7 +66,7 @@ export const addPromos = (promos) => ({
 });
 
 export const promosLoading = () => ({
-    type: actionTypes.promosLoading
+    type: ActionTypes.PROMOS_LOADING
 });
 
 export const promosFailed = (errMess) => ({
